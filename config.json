@@ -1,0 +1,10 @@
+{
+  "db": {
+    "name": "pets_shop",
+    "host": "localhost",
+    "port": 5433,
+    "username": "root",
+    "password": "root",
+    "dialect": "postgres"
+  }
+}
