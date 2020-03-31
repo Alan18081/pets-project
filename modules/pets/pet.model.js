@@ -28,7 +28,10 @@ const PetModel = Pet.init({
     },
     breed: {
         type: DataTypes.STRING
+    },
+    quantity: {
+        type: DataTypes.INTEGER,
     }
-}, { sequelize });
+}, { sequelize, createdAt: false, updatedAt: false });
 
 module.exports = PetModel;

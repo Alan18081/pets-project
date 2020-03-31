@@ -8,11 +8,15 @@ class Order extends Model {}
 
 const OrderModel = Order.init({
    id: { primaryKey: true, autoIncrement: true, type: DataTypes.INTEGER },
-   postedDate: { allowNull: false, type: DataTypes.DATE }
-}, { sequelize });
+   postedDate: { allowNull: false, type: DataTypes.DATE },
+}, { sequelize, createdAt: false, updatedAt: false });
 
-OrderModel.items = OrderModel.hasMany(OrderItemModel);
-OrderModel.customer = OrderModel.hasOne(CustomerModel, { foreignKey: 'customerId', foreignKeyConstraint: true });
+OrderModel.hasMany(OrderItemModel, { foreignKey: 'orderId', as: 'items' });
+OrderModel.hasOne(CustomerModel, { foreignKey: 'orderId', foreignKeyConstraint: true, as: 'customer' });
 
-OrderItemModel.pet = OrderItemModel.belongsTo(PetModel, { foreignKeyConstraint: true, foreignKey: 'petId', targetKey: 'id' });
-OrderItemModel.order = OrderItemModel.belongsTo(OrderModel, { foreignKeyConstraint: true, foreignKey: 'orderId', targetKey: 'id' });
+OrderItemModel.belongsTo(PetModel, { foreignKeyConstraint: true, foreignKey: 'petId', targetKey: 'id' });
+// OrderItemModel.belongsTo(OrderModel, { foreignKeyConstraint: true, foreignKey: 'orderId', targetKey: 'id' });
+
+OrderModel.belongsToMany(PetModel, { through: { model: OrderItemModel } });
+
+module.exports = OrderModel;

@@ -5,6 +5,8 @@ const ordersController = require('./orders.controller');
 
 const router = new Router();
 
+router.get('/', ordersController.findMany);
+
 router.post('/', createValidator(CreateOrderSchema), ordersController.createOne.bind(ordersController));
 
 module.exports = router;

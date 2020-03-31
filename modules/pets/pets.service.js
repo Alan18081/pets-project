@@ -15,6 +15,7 @@ class PetsService {
             throw new Error(`You cannot buy more pets than it is available for id ${pet.id}`);
         }
         pet.quantity = pet.quantity - quantity;
+        console.log(pet.quantity, quantity);
         await pet.save({ transaction });
     }
 }

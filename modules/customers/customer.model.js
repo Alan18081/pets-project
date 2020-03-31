@@ -9,6 +9,7 @@ const CustomerModel = Customer.init({
     email: { type: DataTypes.STRING, allowNull: false },
     address: { type: DataTypes.STRING, allowNull: false },
     phone: { type: DataTypes.STRING, allowNull: false },
-}, { sequelize });
+    orderId: { type: DataTypes.INTEGER, allowNull: false },
+}, { sequelize, createdAt: false, updatedAt: false });
 
 module.exports = CustomerModel;
